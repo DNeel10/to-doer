@@ -10,6 +10,11 @@ class Project {
   addTodo(todo) {
     this.todos.push(todo)
   }
+
+  deleteTodo(todo) {
+    const index = this.todos.indexOf(todo);
+    this.todos.splice(index, 1);
+  }
 }
 
 export default Project;

@@ -44,4 +44,21 @@ function createTodobutton(el, project) {
 
 createProjectbutton();
 
+const project2 = new Project('Proj2','Anytime');
+const todo2 = createTodo('todo2','desc2','due2','prio2')
+const todo3 = createTodo('todo3', 'desc3', 'due3', 'prio3')
+console.log(todo2.status);
+todo2.changeStatus('Complete');
+console.log(todo2.status)
+project2.addTodo(todo1);
+project2.addTodo(todo2);
+project2.addTodo(todo3);
+console.log(project2.todos);
+project2.deleteTodo(todo2);
+console.log(project2.todos);
 
+window.project1 = project1;
+window.todo1 = todo1
+window.todo2 = todo2;
+window.createTodo = createTodo;
+window.Project = Project
