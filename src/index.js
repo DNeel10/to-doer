@@ -1,6 +1,7 @@
 import './style.css';
 import createTodo from './todo.js'
 import Project from './project.js'
+import { displayTodo } from './display.js'
 
 let i = 0
 let j = 0
@@ -62,3 +63,5 @@ window.todo1 = todo1
 window.todo2 = todo2;
 window.createTodo = createTodo;
 window.Project = Project
+
+projectContainerDiv.appendChild(displayTodo(todo1));
