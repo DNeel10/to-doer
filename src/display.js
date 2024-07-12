@@ -28,3 +28,21 @@ export function displayTodo(todo) {
   return todoDiv;
   
 }
+
+export function displayProject(project) {
+  const projectDiv = document.createElement('div');
+  projectDiv.classList.add('project');
+
+  const projectName = document.createElement('h2');
+  projectName.textContent = `${project.title}`;
+  projectDiv.appendChild(projectName);
+
+  const projectDueDateElement = document.createElement('p');
+  projectDueDateElement.textContent = `${project.dueDate}`;
+  projectDiv.appendChild(projectDueDateElement);
+
+  project.todos.forEach(todo => {
+    projectDiv.appendChild(displayTodo(todo));
+  })
+  return projectDiv;
+}
