@@ -15,13 +15,34 @@ function createProjectbutton() {
   projectButton.textContent = 'Create Project'
   
   projectContainerDiv.appendChild(projectButton)
+
   
+
+  projectButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    const newProject = new Project('name', 'date');
+
+    const newProjectDiv = document.createElement('div');
+    newProjectDiv.classList.add('project');
+
+    newProjectDiv.appendChild(displayProject(newProject));
+
+    createTodobutton(newProjectDiv, newProject);
+
+    projectContainerDiv.appendChild(newProjectDiv);
+  })
 }
 
 function createTodobutton(el, project) {
   const todoButton = document.createElement('button');
-  el.appendChild(todoButton);
+  todoButton.textContent = 'Create Todo';
 
+  todoButton.addEventListener('click', (e) => {
+    const newTodo = createTodo('testname', 'testdesc', 'testdue', 'testprio');
+    project.addTodo(newTodo);
+    el.appendChild(displayTodo(newTodo));
+  })
+  el.appendChild(todoButton);
 }
 
 createProjectbutton();

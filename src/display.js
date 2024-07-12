@@ -31,7 +31,6 @@ export function displayTodo(todo) {
 
 export function displayProject(project) {
   const projectDiv = document.createElement('div');
-  projectDiv.classList.add('project');
 
   const projectName = document.createElement('h2');
   projectName.textContent = `${project.title}`;
@@ -44,5 +43,6 @@ export function displayProject(project) {
   project.todos.forEach(todo => {
     projectDiv.appendChild(displayTodo(todo));
   })
+
   return projectDiv;
 }
