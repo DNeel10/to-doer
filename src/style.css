@@ -1,11 +1,22 @@
 .container {
   width: 80%;
   margin: 0 auto;
+  display: flex;
+  gap: 1em;
+}
+
+.btn-project {
+  border-radius: 10px;
+  background: rgb(96, 107, 236);
+  padding: .5em;
 }
 
 .project {
-  border: 1px solid red;
-  margin: .5em;
+  border-radius: 5px;
+  padding: .5em;
+  width: 100%;
+  background-color: #f4f1e6;
+  
 }
 
 .todo {
@@ -15,6 +26,22 @@
   border-radius: 5px;
   justify-content: space-around;
   margin: 1em;
+  background-color: #d9e2e4;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 
 }
+
+.sidebar {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 1em;
+}
+
+.sidebar__list {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+

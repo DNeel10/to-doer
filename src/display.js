@@ -1,3 +1,5 @@
+import { createTodoButton } from './buttons.js'
+
 export function displayTodo(todo) {
   const todoDiv = document.createElement('div');
   todoDiv.classList.add('todo');
@@ -31,18 +33,41 @@ export function displayTodo(todo) {
 
 export function displayProject(project) {
   const projectDiv = document.createElement('div');
-
+  
+  createTodoButton(projectDiv, project);
   const projectName = document.createElement('h2');
   projectName.textContent = `${project.title}`;
   projectDiv.appendChild(projectName);
 
   const projectDueDateElement = document.createElement('p');
-  projectDueDateElement.textContent = `${project.dueDate}`;
+  projectDueDateElement.textContent = `Due: ${project.dueDate}`;
   projectDiv.appendChild(projectDueDateElement);
 
   project.todos.forEach(todo => {
     projectDiv.appendChild(displayTodo(todo));
   })
 
+  
+
   return projectDiv;
+}
+
+export function displayProjectList(projects, projectsElement) {
+  const projectContainerDiv = document.querySelector('#project-container');
+
+  projectsElement.innerHTML = ''
+
+  for (const project of projects) {
+    const projectLink = document.createElement('button');
+    projectLink.classList.add('sidebar__link');
+    projectLink.textContent = `${project.title}`;
+
+    projectLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      projectContainerDiv.innerHTML = ''
+      projectContainerDiv.appendChild(displayProject(project));
+    })
+
+    projectsElement.appendChild(projectLink);
+  }
 }

@@ -1,10 +1,11 @@
+export let projects = []
 
-
-class Project {
+export default class Project {
   constructor(title, dueDate) {
     this.title = title;
     this.dueDate = dueDate
     this.todos = []
+    projects.push(this);
   }
 
   addTodo(todo) {
@@ -17,4 +18,3 @@ class Project {
   }
 }
 
-export default Project;
