@@ -3,22 +3,20 @@ import createTodo from './todo.js'
 import Project, { projects } from './project.js'
 import { displayProject, displayProjectList } from './display.js'
 import { createProjectButton } from './buttons.js';
-
+import { createNewProjectModal } from './modals.js';
 
 let i = 0
 let j = 0
 const todo1 = createTodo('test', 'testing', 'july 21', 'important');
-const project1 = new Project('Project 1', 'September 30');
 
-const mainContainer = document.querySelector('#todo-main');
 const projectContainerDiv = document.querySelector('#project-container');
 const sidebarElement = document.querySelector('#sidebar');
 const projectList = document.querySelector('#project-list');
 
 
-const projectToday = new Project('My Day','Today');
+const projectToday = new Project('Today','Today');
 const todo2 = createTodo('todo2','desc2','due2','prio2')
-const todo3 = createTodo('todo3', 'desc3', 'due3', 'prio3')
+const todo3 = createTodo('todo3', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 'due3', 'prio3')
 projectToday.addTodo(todo1);
 projectToday.addTodo(todo2);
 projectToday.addTodo(todo3);

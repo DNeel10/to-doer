@@ -5,30 +5,49 @@
   gap: 1em;
 }
 
-.btn-project {
+.btn {
   border-radius: 10px;
-  background: rgb(96, 107, 236);
+  border: none;
   padding: .5em;
+}
+.btn-project {
+  background: #A5815D;
+  color: #fff;
+  font-weight: 700;
+}
+
+.btn-todo {
+  background: #31697A;
+  color: #fff;
 }
 
 .project {
   border-radius: 5px;
   padding: .5em;
   width: 100%;
-  background-color: #f4f1e6;
-  
+  background-color: #fff;
+  min-height: 700px;
+}
+
+.project-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.project-info__due {
+  color: grey;
+  font-size: .85rem;
+  align-self:flex-end
 }
 
 .todo {
   display: flex;
   font-size: .75rem;
-  border: 1px solid blue;
   border-radius: 5px;
   justify-content: space-around;
-  margin: 1em;
-  background-color: #d9e2e4;
+  margin: 1em 0;
+  background-color: #E1F4FA;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-
 }
 
 .sidebar {
@@ -36,12 +55,48 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 1em;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: #31697A;
 }
 
 .sidebar__list {
   display: flex;
   width: 100%;
   flex-direction: column;
+  gap: .5em;
 }
 
+.sidebar__link {
+  border-radius: 10px;
+  padding: .5em 0;
+}
+
+.modal-project {
+  border: none;
+  border-radius: 10px;
+  position: fixed;
+  top: -10%;
+  right: -20%;
+  width: 600px;
+  max-width: 100%;
+  height: 400px;
+  max-height: 100%;
+  padding: 2em;
+}
+
+.modal-project::backdrop {
+  background-color: grey;
+  opacity: .6;
+}
+
+.modal-project > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-cancel {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
