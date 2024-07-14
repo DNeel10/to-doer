@@ -1,4 +1,3 @@
-import { createTodoButton } from './buttons.js'
 
 export function displayTodo(todo) {
   const todoDiv = document.createElement('div');
@@ -26,16 +25,12 @@ export function displayTodo(todo) {
   todoDiv.appendChild(todoDue);
   todoDiv.appendChild(todoStatus);
 
-  console.log(todoDiv);
   return todoDiv;
-  
 }
 
 export function displayProject(project) {
   const projectDiv = document.createElement('div');
   projectDiv.classList.add('project')
-
-  createTodoButton(projectDiv, project);
 
   const projectInfoElement = document.createElement('div');
   projectInfoElement.classList.add('project-info');
@@ -58,22 +53,21 @@ export function displayProject(project) {
   return projectDiv;
 }
 
-export function displayProjectList(projects, projectsElement) {
-  const projectContainerDiv = document.querySelector('#project-container');
-
-  projectsElement.innerHTML = ''
+export function displayProjectList(projects, onProjectSelect) {
+  const projectListElement = document.createElement('div');
+  projectListElement.classList.add('project-list');
 
   for (const project of projects) {
     const projectLink = document.createElement('button');
-    projectLink.classList.add('sidebar__link');
+    projectLink.classList.add('btn-sidebar');
     projectLink.textContent = `${project.title}`;
 
     projectLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      projectContainerDiv.innerHTML = ''
-      projectContainerDiv.appendChild(displayProject(project));
+      onProjectSelect(project);
     })
 
-    projectsElement.appendChild(projectLink);
+    projectListElement.appendChild(projectLink);
   }
+
+  return projectListElement
 }

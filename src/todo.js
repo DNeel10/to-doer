@@ -10,7 +10,7 @@ function createTodo(name, description, dueDate, priority, status = 'Incomplete')
       if (validStatuses.includes(status)) {
         this.status = newStatus;
       } else {
-        console.log('Invalid Stauts');
+        console.log('Invalid Status');
       }
     }
   };
