@@ -28,6 +28,22 @@
   right: 5px;
 }
 
+.btn-delete {
+  background: #f4a79bda;
+  height: 50%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.btn-delete-project {
+  background: #f4a79bda;
+  margin: auto 1em;
+}
+
+.btn-sidebar {
+  background-color: #E1F4FA
+}
+
 .project {
   border-radius: 5px;
   padding: .5em;

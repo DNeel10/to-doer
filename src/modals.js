@@ -55,7 +55,7 @@ export function createNewProjectModal(onSubmit) {
   return modal;
 }
 
-export function createNewTodoModal(onSubmit) {
+export function createNewTodoModal(project, onSubmit) {
   const modal = document.createElement('dialog');
   modal.classList.add('modal','modal-todo');
 
@@ -127,7 +127,7 @@ export function createNewTodoModal(onSubmit) {
       todoDueDateInput.value, 
       todoPriorityInput.value
     );
-    onSubmit(newTodo);
+    onSubmit(project, newTodo);
     modal.close();
   })
 

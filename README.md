@@ -9,14 +9,14 @@ The following is a list of items and features i want to implement in this projec
     * ~~main section to show the project you are in, and any to-do's you've created~~
 * sidebar
     * ~~each project should be a link to view the contents within the project~~
-    * add a button to create a project
+    * ~~add a button to create a project~~
 * To Do functionality
     * edit to-do
-    * delete todo from the dom
+    * ~~delete todo from the dom~~
     * toggle the status from the dom
     * Challenge: Drag and drop prioritization
 * project Functionality
-    * delete projects
+    * ~~delete projects~~
     * edit projects
 * storage
     * local storage
