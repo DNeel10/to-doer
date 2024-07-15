@@ -1,6 +1,6 @@
 import { createButton } from './buttons.js';
 
-export function displayTodo(todo, project) {
+export function displayTodoCard(todo, project) {
   const todoDiv = document.createElement('div');
   todoDiv.classList.add('todo');
 
@@ -8,17 +8,17 @@ export function displayTodo(todo, project) {
   todoName.textContent = `${todo.name}`
   todoName.classList.add('todo__name');
 
-  const todoDesc = document.createElement('p');
-  todoDesc.textContent = `${todo.description}`;
-  todoDesc.classList.add('todo__desc');
+  // const todoDesc = document.createElement('p');
+  // todoDesc.textContent = `${todo.description}`;
+  // todoDesc.classList.add('todo__desc');
 
   const todoDue = document.createElement('p');
   todoDue.textContent = `${todo.dueDate}`;
   todoDue.classList.add('todo__due');
 
-  const todoStatus = document.createElement('p');
-  todoStatus.textContent = `${todo.status}`;
-  todoStatus.classList.add('todo__status');
+  // const todoStatus = document.createElement('p');
+  // todoStatus.textContent = `${todo.status}`;
+  // todoStatus.classList.add('todo__status');
 
   const deleteButton = createButton('Delete Task', () => {
     project.deleteTodo(todo);
@@ -29,9 +29,7 @@ export function displayTodo(todo, project) {
 
   // append all elements to the todoDiv
   todoDiv.appendChild(todoName);
-  todoDiv.appendChild(todoDesc);
   todoDiv.appendChild(todoDue);
-  todoDiv.appendChild(todoStatus);
   todoDiv.appendChild(deleteButton);
 
   return todoDiv;
@@ -56,7 +54,7 @@ export function displayProject(project) {
   projectDiv.appendChild(projectInfoElement);
 
   project.todos.forEach(todo => {
-    projectDiv.appendChild(displayTodo(todo, project));
+    projectDiv.appendChild(displayTodoCard(todo, project));
   })
 
   return projectDiv;
