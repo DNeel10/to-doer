@@ -55,7 +55,7 @@ export function createNewProjectModal(onSubmit) {
   return modal;
 }
 
-export function createNewTodoModal(project, onSubmit) {
+export function createNewTodoModal(onSubmit) {
   const modal = document.createElement('dialog');
   modal.classList.add('modal','modal-todo');
 
@@ -65,6 +65,7 @@ export function createNewTodoModal(project, onSubmit) {
 
   closeModal.addEventListener('click', () => {
     modal.close();
+    modal.remove();
   })
 
   const todoForm = document.createElement('form');
@@ -81,11 +82,11 @@ export function createNewTodoModal(project, onSubmit) {
   const todoDescDiv = document.createElement('div');
   const todoDescLabel = document.createElement('label'); 
   todoDescLabel.textContent = 'Description';
-  const todoDescInput = document.createElement('input');
-  todoDescInput.type = 'text';
+  const todoDescInput = document.createElement('textarea');
   todoDescInput.name = 'desc';
   todoDescDiv.appendChild(todoDescLabel);
   todoDescDiv.appendChild(todoDescInput);
+  todoDescInput.classList.add('input-desc');
 
   const todoDueDateDiv = document.createElement('div');
   const todoDueDateLabel = document.createElement('label'); 
@@ -114,7 +115,6 @@ export function createNewTodoModal(project, onSubmit) {
   todoForm.appendChild(todoPriorityDiv);
   todoForm.appendChild(todoSubmitButton);
 
-
   modal.appendChild(todoForm);
   modal.appendChild(closeModal);
 
@@ -127,8 +127,9 @@ export function createNewTodoModal(project, onSubmit) {
       todoDueDateInput.value, 
       todoPriorityInput.value
     );
-    onSubmit(project, newTodo);
+    onSubmit(newTodo);
     modal.close();
+    modal.remove();
   })
 
   return modal;

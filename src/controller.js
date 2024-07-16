@@ -6,10 +6,8 @@ import { createNewProjectModal, createNewTodoModal } from './modals.js';
 
 
 export function initializeApp(projectContainerElement, projectListElement, sidebarElement) {
-  const today = new Project('Today', 'Today');
-
-  const todo = createTodo('First Item', 'Create your own items to complete', 'Due Date', 'High Priority');
-  today.addTodo(todo);
+  const today = new Project('Today', `Today`);
+  // const date = new Date.getDate();
 
   console.log(projects);
 
@@ -18,7 +16,7 @@ export function initializeApp(projectContainerElement, projectListElement, sideb
     projectContainerElement.appendChild(displayProject(project));
 
     const todoButton = createButton('Create To-Do', () => {
-      const todoModal = createNewTodoModal(project, (newTodo) => {
+      const todoModal = createNewTodoModal((newTodo) => {
         projectContainerElement.innerHTML = ''
         project.addTodo(newTodo);
         projectContainerElement.appendChild(displayProject(project));
@@ -44,8 +42,6 @@ export function initializeApp(projectContainerElement, projectListElement, sideb
   function onProjectSelect(project) {
     refreshPageView(project);
   }
-
-
 
   function updateProjectList() {
     projectListElement.innerHTML = '';

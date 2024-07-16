@@ -64,18 +64,39 @@
 }
 
 .todo {
-  display: flex;
   font-size: .75rem;
   border-radius: 5px;
-  justify-content: space-around;
-  margin: 1em 0;
+  margin: 1em;
+  padding: 0 1em;
   background-color: #E1F4FA;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
+.hidden {
+  display: none;
+}
+
+.todo__info {
+  display: flex;
+  justify-content: space-between ;
+}
+
 .todo__due {
-  margin: auto 1em;
   text-align: center;
+}
+
+.todo-expanded {
+  min-height: 300px;
+}
+
+.info-edit-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-desc {
+  width: 100%;
+  min-height: 150px;
 }
 
 .sidebar {
