@@ -1,11 +1,9 @@
-export let projects = []
 
 export default class Project {
-  constructor(title, dueDate) {
-    this.title = title;
+  constructor(name, dueDate) {
+    this.name = name;
     this.dueDate = dueDate
     this.todos = []
-    projects.push(this);
   }
 
   addTodo(todo) {
@@ -17,7 +15,8 @@ export default class Project {
     this.todos.splice(index, 1);
   }
 
-  static deleteProject(project) {
+  static deleteProject(project, projects) {
+    
     const index = projects.indexOf(project);;
     if (index > -1) {
       projects.splice(index, 1);

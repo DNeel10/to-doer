@@ -1,5 +1,6 @@
 import Project from './project.js';
 import createTodo from './todo.js';
+import { format } from "date-fns";
 
 export function createNewProjectModal(onSubmit) {
   const modal = document.createElement('dialog');
@@ -15,29 +16,35 @@ export function createNewProjectModal(onSubmit) {
 
   const projectForm = document.createElement('form');
 
-  const projectTitleDiv = document.createElement('div');
-  const projectTitleLabel = document.createElement('label');
-  projectTitleLabel.textContent = 'Project Title';
-  const projectTitleInput = document.createElement('input');
-  projectTitleInput.type = 'text';
-  projectTitleInput.name = 'projectTitle';
-  projectTitleDiv.appendChild(projectTitleLabel);
-  projectTitleDiv.appendChild(projectTitleInput);
+  const projectNameDiv = document.createElement('div');
+  const projectNameLabel = document.createElement('label');
+  projectNameLabel.textContent = 'Project name';
+  projectNameLabel.htmlFor = 'projectname'
+  const projectNameInput = document.createElement('input');
+  projectNameInput.type = 'text';
+  projectNameInput.id = 'projectname';
+  projectNameInput.name = 'projectname';
+  projectNameDiv.appendChild(projectNameLabel);
+  projectNameDiv.appendChild(projectNameInput);
 
   const projectDueDateDiv = document.createElement('div');
   const projectDueDateLabel = document.createElement('label'); 
   projectDueDateLabel.textContent = 'Due Date';
+  projectDueDateLabel.htmlFor = 'dueDate';
   const projectDueDateInput = document.createElement('input');
   projectDueDateInput.type = 'date';
   projectDueDateInput.name = 'dueDate';
+  projectDueDateInput.id = 'dueDate';
   projectDueDateDiv.appendChild(projectDueDateLabel);
   projectDueDateDiv.appendChild(projectDueDateInput);
 
   const projectSubmitButton = document.createElement('button');
   projectSubmitButton.textContent = 'Create Project';
 
-  projectForm.appendChild(projectTitleDiv);
+  projectForm.appendChild(projectNameDiv);
+  projectNameDiv.classList.add('form-group');
   projectForm.appendChild(projectDueDateDiv);
+  projectDueDateDiv.classList.add('form-group');
   projectForm.appendChild(projectSubmitButton);
 
 
@@ -47,7 +54,7 @@ export function createNewProjectModal(onSubmit) {
   projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    const newProject = new Project(projectTitleInput.value, projectDueDateInput.value);
+    const newProject = new Project(projectNameInput.value, format(projectDueDateInput.value, "MM/dd/yyyy"));
     onSubmit(newProject);
     modal.close();
   })
@@ -68,22 +75,30 @@ export function createNewTodoModal(onSubmit) {
     modal.remove();
   })
 
+  modal.addEventListener('cancel', () => {
+    modal.close();
+    modal.innerHTML = ''
+  })
   const todoForm = document.createElement('form');
 
   const todoNameDiv = document.createElement('div');
   const todoNameLabel = document.createElement('label');
   todoNameLabel.textContent = 'To-Do Name';
+  todoNameLabel.htmlFor = 'todoName';
   const todoNameInput = document.createElement('input');
   todoNameInput.type = 'text';
   todoNameInput.name = 'todoName';
+  todoNameInput.id = 'todoName';
   todoNameDiv.appendChild(todoNameLabel);
   todoNameDiv.appendChild(todoNameInput);
 
   const todoDescDiv = document.createElement('div');
   const todoDescLabel = document.createElement('label'); 
   todoDescLabel.textContent = 'Description';
+  todoDescLabel.htmlFor = 'desc';
   const todoDescInput = document.createElement('textarea');
   todoDescInput.name = 'desc';
+  todoDescInput.id = 'desc';
   todoDescDiv.appendChild(todoDescLabel);
   todoDescDiv.appendChild(todoDescInput);
   todoDescInput.classList.add('input-desc');
@@ -91,18 +106,22 @@ export function createNewTodoModal(onSubmit) {
   const todoDueDateDiv = document.createElement('div');
   const todoDueDateLabel = document.createElement('label'); 
   todoDueDateLabel.textContent = 'Due Date';
+  todoDueDateLabel.htmlFor = 'dueDate';
   const todoDueDateInput = document.createElement('input');
   todoDueDateInput.type = 'date';
   todoDueDateInput.name = 'dueDate';
+  todoDueDateInput.id = 'dueDate'
   todoDueDateDiv.appendChild(todoDueDateLabel);
   todoDueDateDiv.appendChild(todoDueDateInput);
 
   const todoPriorityDiv = document.createElement('div');
   const todoPriorityLabel = document.createElement('label'); 
   todoPriorityLabel.textContent = 'Priority';
+  todoPriorityLabel.htmlFor = 'priority';
   const todoPriorityInput = document.createElement('input');
   todoPriorityInput.type = 'Select';
   todoPriorityInput.name = 'priority';
+  todoPriorityInput.id = 'priority';
   todoPriorityDiv.appendChild(todoPriorityLabel);
   todoPriorityDiv.appendChild(todoPriorityInput);
 
@@ -110,9 +129,13 @@ export function createNewTodoModal(onSubmit) {
   todoSubmitButton.textContent = 'Create To-Do';
 
   todoForm.appendChild(todoNameDiv);
+  todoNameDiv.classList.add('form-group');
   todoForm.appendChild(todoDescDiv);
+  todoDescDiv.classList.add('form-group');
   todoForm.appendChild(todoDueDateDiv);
+  todoDueDateDiv.classList.add('form-group')
   todoForm.appendChild(todoPriorityDiv);
+  todoPriorityDiv.classList.add('form-group')
   todoForm.appendChild(todoSubmitButton);
 
   modal.appendChild(todoForm);
@@ -124,7 +147,7 @@ export function createNewTodoModal(onSubmit) {
     const newTodo = createTodo(
       todoNameInput.value, 
       todoDescInput.value, 
-      todoDueDateInput.value, 
+      format(todoDueDateInput.value, "MM/dd/yyyy"), 
       todoPriorityInput.value
     );
     onSubmit(newTodo);

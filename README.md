@@ -17,8 +17,8 @@ The following is a list of items and features i want to implement in this projec
     * Challenge: Drag and drop prioritization
 * project Functionality
     * ~~delete projects~~
-    * edit projects
+    * ~~edit projects~~
 * storage
-    * local storage
+    * ~~local storage~~
 * Styling
-    * make sure things look better all around
+    * ~~make sure things look better all around~~

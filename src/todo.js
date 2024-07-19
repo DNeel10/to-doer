@@ -12,7 +12,7 @@ function createTodo(name, description, dueDate, priority, status = 'Incomplete')
       } else {
         console.log('Invalid Status');
       }
-    }
+    },
   };
 }
 
