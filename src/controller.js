@@ -32,14 +32,14 @@ export function initializeApp(projectContainerElement, sidebarElement) {
 
     // projectContainerElement.appendChild(deleteProjectButton);
     // deleteProjectButton.classList.add('btn', 'btn-delete-project');
-    projectContainerElement.appendChild(displayProject(project, projects, updateProjectList()));
+    projectContainerElement.appendChild(displayProject(project, projects, updateProjectList));
 
     const todoButton = createButton('Add Task', () => {
       const todoModal = createNewTodoModal((newTodo) => {
         projectContainerElement.innerHTML = ''
         project.addTodo(newTodo);
         saveItem(projects);
-        projectContainerElement.appendChild(displayProject(project, projects, updateProjectList()));
+        projectContainerElement.appendChild(displayProject(project, projects, updateProjectList));
         projectContainerElement.appendChild(todoButton);
         refreshPageView(project);
       })
@@ -73,7 +73,7 @@ export function initializeApp(projectContainerElement, sidebarElement) {
       const projectModal = createNewProjectModal((newProject) => {
         projects.push(newProject)
         saveItem(projects);
-        updateProjectList(projects);
+        updateProjectList();
         onProjectSelect(newProject);
       })
       document.body.appendChild(projectModal);
@@ -88,7 +88,7 @@ export function initializeApp(projectContainerElement, sidebarElement) {
   }
 
 
-  updateProjectList(projects);
+  updateProjectList();
 
   onProjectSelect(projects[0]);
 }

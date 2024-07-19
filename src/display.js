@@ -142,9 +142,11 @@ export function displayProject(project, projects, updateProjectList) {
   
   const deleteProjectButton = createButton('🗑️', () => {
     Project.deleteProject(project, projects);
-    updateProjectList();
     saveItem(projects);
-    projectContainerElement.innerHTML = '';
+    
+    projectDiv.innerHTML = '';
+    projectDiv.replaceWith(displayProject(projects[0], projects, updateProjectList))
+    updateProjectList();
   });
 
   deleteProjectButton.classList.add('btn', 'btn-icons');
