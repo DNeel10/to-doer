@@ -13,9 +13,9 @@ export function displayTodoCard(todo, project, projects) {
   const todoButtons = document.createElement('div');
 
   const todoNameDiv = document.createElement('div');
+  todoNameDiv.classList.add('todo__name')
   const todoName = document.createElement('h3');
   todoName.textContent = todo.name
-  todoName.classList.add('todo__name');
   todoNameDiv.appendChild(todoName);
 
   const todoDescDiv = document.createElement('div');
@@ -47,17 +47,36 @@ export function displayTodoCard(todo, project, projects) {
   })
   editButton.classList.add('btn', 'btn-icons');
 
+  const todoPriorityDiv = document.createElement('div');
+  todoPriorityDiv.classList.add('todo__priority');
+  
+  switch (todo.priority){
+    case "High":
+      todoPriorityDiv.classList.add('prio-high');
+      break;
+    case "Medium":
+      todoPriorityDiv.classList.add('prio-medium');
+      break;
+    case "Low":
+      todoPriorityDiv.classList.add('prio-low');
+      break;
+  }
+
   // append all elements to the todoDiv
   todoButtons.appendChild(editButton)
   todoButtons.appendChild(deleteButton)
   todoButtons.classList.add('buttons');
 
+  todoNameDiv.appendChild(todoPriorityDiv);
+  todoNameDiv.appendChild(todoName);
   todoInfo.appendChild(todoNameDiv);
   todoInfo.appendChild(todoDue);
   todoInfo.appendChild(todoButtons);
 
   todoDiv.appendChild(todoInfo);
   todoDiv.appendChild(todoDescDiv);
+
+
 
   todoDiv.addEventListener('click', () => {
     document.querySelectorAll('.todo-expanded').forEach(card => {

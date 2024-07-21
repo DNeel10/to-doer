@@ -118,10 +118,27 @@ export function createNewTodoModal(onSubmit) {
   const todoPriorityLabel = document.createElement('label'); 
   todoPriorityLabel.textContent = 'Priority';
   todoPriorityLabel.htmlFor = 'priority';
-  const todoPriorityInput = document.createElement('input');
-  todoPriorityInput.type = 'Select';
+  const todoPriorityInput = document.createElement('select');
   todoPriorityInput.name = 'priority';
   todoPriorityInput.id = 'priority';
+
+  const priorityOptionHigh = document.createElement('option');
+  priorityOptionHigh.textContent = "High";
+  priorityOptionHigh.value = "High";
+
+
+  const priorityOptionMedium = document.createElement('option');
+  priorityOptionMedium.textContent = "Medium";
+  priorityOptionMedium.value = "Medium";
+
+
+  const priorityOptionLow = document.createElement('option');
+  priorityOptionLow.textContent = "Low";
+  priorityOptionLow.value = "Low";
+
+  todoPriorityInput.append(priorityOptionHigh, priorityOptionMedium, priorityOptionLow);
+
+
   todoPriorityDiv.appendChild(todoPriorityLabel);
   todoPriorityDiv.appendChild(todoPriorityInput);
 
@@ -150,6 +167,7 @@ export function createNewTodoModal(onSubmit) {
       format(todoDueDateInput.value, "MM/dd/yyyy"), 
       todoPriorityInput.value
     );
+    console.log(newTodo);
     onSubmit(newTodo);
     modal.close();
     modal.remove();

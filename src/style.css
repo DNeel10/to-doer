@@ -119,13 +119,19 @@ input {
   display: none;
 }
 
-.todo__info {
+.todo__name {
   display: flex;
+  gap: 1em;
+}
+
+.todo__info {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   justify-content: space-between ;
 }
 
 .buttons {
-  margin-block: auto;
+  justify-self: end;
 }
 
 .todo__due {
@@ -133,21 +139,44 @@ input {
   margin-block: auto;
 }
 
+.todo__priority {
+  border-radius: 100px;
+  height: 2em;
+  width: 2em;
+  align-self: center;
+}
+
+.prio-high {
+  background-color: red;
+  opacity: .85;
+}
+
+.prio-medium {
+  background-color: orange;
+  opacity: .85;
+}
+
+.prio-low {
+  background-color: green;
+  opacity: .85;
+}
+
 .todo__desc {
   background-color: #fff;
-  font-size: 1.125rem;
+  font-size: 1rem;
   padding: 1em;
   border-radius: 10px;
 }
 
 .todo-expanded {
   min-height: fit-content;
-  padding-bottom: .5em;
+  padding: .5em;
 }
 
 .info-edit-form {
   display: flex;
   justify-content: space-between;
+  margin: .5em;
 }
 
 .input-desc {
@@ -244,10 +273,6 @@ input {
     width: 350px;
   }
 
-  .project {
-    width: 100%;
-  }
-
   .project-info {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -268,6 +293,10 @@ input {
     justify-self: end;
   }
 
+  .todo__name {
+    justify-self: start;
+  }
+
   .todo__info {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -279,6 +308,9 @@ input {
     grid-row: 2;
     margin: .75em 0;
     justify-self: start;
+  }
 
+  .todo__priority {
+    justify-self: start;
   }
 }
