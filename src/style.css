@@ -126,8 +126,27 @@ input {
 
 .todo__info {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: .25fr 1fr 1fr 1fr;
   justify-content: space-between ;
+}
+
+.status-switch {
+  height: 1.5em;
+  width: 2.5em;
+  align-self: center;
+}
+
+.todo__completed {
+  background: rgba(0, 128, 0, .05);
+  opacity: 0.25;
+  position: relative;
+}
+
+.todo__completed .status-switch {
+  opacity: 1;
+  z-index: 1;
+  position: relative;
+  display: block;
 }
 
 .buttons {
@@ -142,7 +161,7 @@ input {
 .todo__priority {
   border-radius: 100px;
   height: 2em;
-  width: 2em;
+  min-width: 2em;
   align-self: center;
 }
 
@@ -285,29 +304,40 @@ input {
     padding: 1em;
   }
 
+  .todo__info {
+    display: grid;
+    grid-template-columns: .5fr 1fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+  }
+
   .todo__desc {
     font-size: .75rem;
   }
 
   .buttons {
+    grid-column: 3;
+    grid-row: 2;
     justify-self: end;
   }
 
   .todo__name {
     justify-self: start;
+    grid-column: 2 / 4;
   }
 
-  .todo__info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 2;
+  .status-switch {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
   }
+
 
   .todo__due {
     grid-column: 1;
     grid-row: 2;
     margin: .75em 0;
     justify-self: start;
+    align-content: center;
   }
 
   .todo__priority {

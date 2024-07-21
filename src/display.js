@@ -7,6 +7,10 @@ export function displayTodoCard(todo, project, projects) {
   const todoDiv = document.createElement('div');
   todoDiv.classList.add('todo');
 
+  if (todo.status === 'complete') {
+    todoDiv.classList.add('todo__completed');
+  }
+
   const todoInfo = document.createElement('div');
   todoInfo.classList.add('todo__info');
 
@@ -62,13 +66,28 @@ export function displayTodoCard(todo, project, projects) {
       break;
   }
 
+  const todoStatus = document.createElement('input')
+  todoStatus.type = 'checkbox'
+  todoStatus.classList.add('status-switch');
+  todoStatus.checked = todo.status === 'complete';
+
+  todoStatus.addEventListener('change', (e) => {
+    const checkedTodo = e.target.closest('.todo');
+    checkedTodo.classList.toggle('todo__completed');
+    todo.status = todoStatus.checked ? 'complete' : 'incomplete'
+    saveItem(projects);
+    console.log(todo);
+  })
+
+  todoNameDiv.appendChild(todoName);
+  todoNameDiv.appendChild(todoPriorityDiv);
+
   // append all elements to the todoDiv
   todoButtons.appendChild(editButton)
   todoButtons.appendChild(deleteButton)
   todoButtons.classList.add('buttons');
 
-  todoNameDiv.appendChild(todoPriorityDiv);
-  todoNameDiv.appendChild(todoName);
+  todoInfo.appendChild(todoStatus);
   todoInfo.appendChild(todoNameDiv);
   todoInfo.appendChild(todoDue);
   todoInfo.appendChild(todoButtons);
@@ -78,16 +97,20 @@ export function displayTodoCard(todo, project, projects) {
 
 
 
-  todoDiv.addEventListener('click', () => {
-    document.querySelectorAll('.todo-expanded').forEach(card => {
-      if (card !== todoDiv) {
-        card.classList.toggle('todo-expanded');
-        card.querySelector('.todo__desc').classList.toggle('hidden');
-      }
-    })
-    todoDiv.classList.toggle('todo-expanded');
-    todoDescDiv.classList.toggle('hidden');
-
+  todoDiv.addEventListener('click', (e) => {
+    if (e.target.type === 'checkbox') {
+      return; // Do nothing if a checkbox was clicked
+    }
+    if (todoDiv.contains(e.target)) {
+      document.querySelectorAll('.todo-expanded').forEach(card => {
+        if (card !== todoDiv) {
+          card.classList.toggle('todo-expanded');
+          card.querySelector('.todo__desc').classList.toggle('hidden');
+        }
+      })
+      todoDiv.classList.toggle('todo-expanded');
+      todoDescDiv.classList.toggle('hidden');
+    }
 
   })
   return todoDiv;
@@ -164,7 +187,9 @@ export function displayProject(project, projects, updateProjectList) {
     saveItem(projects);
     
     projectDiv.innerHTML = '';
-    projectDiv.replaceWith(displayProject(projects[0], projects, updateProjectList))
+    if (projects.length > 0) {
+      projectDiv.replaceWith(displayProject(projects[0], projects, updateProjectList))
+    }
     updateProjectList();
   });
 
@@ -244,7 +269,7 @@ function createTodoEditForm(todo, displayDiv, project, projects) {
   todoDueLabel.textContent = 'Due Date'
   todoDueLabel.htmlFor ='dueDate'
   const todoDueInput = document.createElement('input');
-  todoDueInput.value = `${todo.dueDate}`;
+  todoDueInput.value = format(todo.dueDate, 'yyyy-MM-dd');
   todoDueInput.type = 'date';
   todoDueInput.id = 'dueDate';
   dueDateInputDiv.appendChild(todoDueLabel);
@@ -261,6 +286,34 @@ function createTodoEditForm(todo, displayDiv, project, projects) {
   todoInfoDiv.appendChild(dueDateInputDiv);
   todoInfoDiv.appendChild(todoEditCancelButton);
   todoInfoDiv.classList.add('info-edit-form')
+
+  const todoPriorityDiv = document.createElement('div');
+  const todoPriorityLabel = document.createElement('label'); 
+  todoPriorityLabel.textContent = 'Priority';
+  todoPriorityLabel.htmlFor = 'priority';
+  const todoPriorityInput = document.createElement('select');
+  todoPriorityInput.name = 'priority';
+  todoPriorityInput.id = 'priority';
+
+  const priorityOptionHigh = document.createElement('option');
+  priorityOptionHigh.textContent = "High";
+  priorityOptionHigh.value = "High";
+
+
+  const priorityOptionMedium = document.createElement('option');
+  priorityOptionMedium.textContent = "Medium";
+  priorityOptionMedium.value = "Medium";
+
+
+  const priorityOptionLow = document.createElement('option');
+  priorityOptionLow.textContent = "Low";
+  priorityOptionLow.value = "Low";
+
+  todoPriorityInput.append(priorityOptionHigh, priorityOptionMedium, priorityOptionLow);
+
+
+  todoPriorityDiv.appendChild(todoPriorityLabel);
+  todoPriorityDiv.appendChild(todoPriorityInput);
 
   const todoDescDiv = document.createElement('div');
   const todoDescLabel = document.createElement('label');
@@ -279,6 +332,7 @@ function createTodoEditForm(todo, displayDiv, project, projects) {
   
   todoForm.appendChild(todoInfoDiv);
   todoForm.appendChild(todoDescDiv);
+  todoForm.appendChild(todoPriorityDiv);
   todoForm.appendChild(todoSubmit);
   
   todoForm.addEventListener('submit', (e) => {
@@ -286,6 +340,7 @@ function createTodoEditForm(todo, displayDiv, project, projects) {
     displayDiv.innerHTML = ''
     todo.name = todoNameInput.value;
     todo.dueDate = format(todoDueInput.value, 'MM/dd/yyyy');
+    todo.priority = todoPriorityInput.value;
     todo.description = todoDescInput.value;
     saveItem(projects);
     console.log(todo)
